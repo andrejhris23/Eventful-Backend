@@ -7,6 +7,7 @@ import app.eventful.model.exceptions.InvalidUserIdException;
 import app.eventful.repository.PostRepo;
 import app.eventful.repository.UserRepo;
 import app.eventful.service.PostService;
+import app.eventful.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +16,11 @@ import java.util.List;
 public class PostServiceImpl implements PostService{
 
     private final PostRepo postRepo;
-    private final UserRepo userRepo;
+    UserService userService;
 
-    public PostServiceImpl(PostRepo postRepo, UserRepo userRepo) {
+    public PostServiceImpl(PostRepo postRepo, UserService userService) {
         this.postRepo = postRepo;
-        this.userRepo = userRepo;
+        this.userService = userService;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public Post createPost(String title, String content, Long userId) {
-        User postAuthor = userRepo.findById(userId).orElseThrow(() -> new InvalidUserIdException(userId));
+        User postAuthor = userService.findById(userId);
         Post newPost = new Post(title, content, postAuthor);
 
         return postRepo.save(newPost);
@@ -56,7 +57,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public Post likePost(Long postId, Long userId) {
-        User currentUser = userRepo.findById(userId).orElseThrow(() -> new InvalidUserIdException(userId));
+        User currentUser = userService.findById(userId);
         Post likedPost = postRepo.findById(postId).orElseThrow(() -> new InvalidPostIdException(postId));
 
         if(likedPost.getLikesFromUsers().contains(currentUser)) {
