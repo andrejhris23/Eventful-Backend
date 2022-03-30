@@ -16,17 +16,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
 
-    private final PostRepo postRepo;
-
-    private final EventRepo eventRepo;
-
-    private final CommentRepo commentRepo;
-
-    public UserServiceImpl(UserRepo userRepo, PostRepo postRepo, EventRepo eventRepo, CommentRepo commentRepo) {
+    public UserServiceImpl(UserRepo userRepo) {
         this.userRepo = userRepo;
-        this.postRepo = postRepo;
-        this.eventRepo = eventRepo;
-        this.commentRepo = commentRepo;
     }
 
     @Override
