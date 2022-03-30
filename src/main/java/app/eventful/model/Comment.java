@@ -21,7 +21,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "full name is required")
     @Column(name="content")
     private String content;
 
