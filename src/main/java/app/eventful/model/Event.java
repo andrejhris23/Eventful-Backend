@@ -48,19 +48,19 @@ public class Event {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(mappedBy = "enrolledEvents", fetch = FetchType.EAGER)
     @JsonIgnore
-    private List<User> attendants;
+    private List<User> attendees;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private User host;
 
-    public Event(String name, String description, String image, int price, int capacity, User host) {
+    public Event(String name, String description, String image, float price, int capacity, User host) {
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
         this.capacity = capacity;
-        this.attendants = new ArrayList<>();
+        this.attendees = new ArrayList<>();
         this.host = host;
     }
 
