@@ -8,10 +8,12 @@ import app.eventful.repository.CommentRepo;
 import app.eventful.service.CommentService;
 import app.eventful.service.PostService;
 import app.eventful.service.UserService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepo commentRepo;
