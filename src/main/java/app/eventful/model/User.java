@@ -69,7 +69,7 @@ public class User {
     private List<Comment> comments;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "userCreator", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "postAuthor", fetch = FetchType.EAGER)
     private List<Post> createdPosts;
 
     @JsonIgnore
