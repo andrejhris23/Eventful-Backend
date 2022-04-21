@@ -33,7 +33,6 @@ public class User {
     private String email;
 
     @NotNull(message = "full name is required")
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "full name must be a string")
     @Column(name="displayName")
     private String displayName;
 
@@ -78,8 +77,7 @@ public class User {
 
 
 
-    public User(Long id, String email, String displayName, String firstName, String lastName, String image) {
-        this.id = id;
+    public User( String email, String displayName, String firstName, String lastName, String image) {
         this.email = email;
         this.displayName = displayName;
         this.firstName = firstName;
