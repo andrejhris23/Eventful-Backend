@@ -63,7 +63,12 @@ public class PostServiceImpl implements PostService{
         if(likedPost.getLikesFromUsers().contains(currentUser)) {
             throw new InvalidPostIdException(postId);
         } else {
-            likedPost.getLikesFromUsers().add(currentUser);
+            List<User> newLikes = likedPost.getLikesFromUsers();
+            newLikes.add(currentUser);
+            likedPost.setLikesFromUsers(newLikes);
+            List<Post> newLikedPosts = currentUser.getLikedPosts();
+            newLikedPosts.add(likedPost);
+            currentUser.setLikedPosts(newLikedPosts);
             return postRepo.save(likedPost);
         }
     }

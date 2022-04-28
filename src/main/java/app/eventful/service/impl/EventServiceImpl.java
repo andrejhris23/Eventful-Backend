@@ -57,7 +57,12 @@ public class EventServiceImpl implements EventService {
 
 
         if(event.getCapacity() > 0) {
-            event.getAttendees().add(attendee);
+            List<User> attendees = event.getAttendees();
+            attendees.add(attendee);
+            event.setAttendees(attendees);
+            List<Event> newEvents = attendee.getEnrolledEvents();
+            newEvents.add(event);
+            attendee.setEnrolledEvents(newEvents);
             // * TODO: maybe add a fixed capacity and another variable like ticketsLeft and decrease that one
             event.setCapacity(event.getCapacity() - 1);
             eventRepo.save(event);
