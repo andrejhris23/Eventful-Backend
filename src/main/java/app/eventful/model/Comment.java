@@ -1,5 +1,6 @@
 package app.eventful.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +29,11 @@ public class Comment {
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Post post;
 
     public Comment(String content, User user, Post post) {
