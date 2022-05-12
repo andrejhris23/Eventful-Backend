@@ -35,11 +35,9 @@ public class Post {
     @Column(name="date")
     private LocalDate date;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> likesFromUsers;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private User postAuthor;
 
