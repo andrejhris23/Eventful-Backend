@@ -2,14 +2,12 @@ package app.eventful.service.impl;
 
 import app.eventful.model.User;
 import app.eventful.model.exceptions.InvalidUserIdException;
-import app.eventful.repository.CommentRepo;
-import app.eventful.repository.EventRepo;
-import app.eventful.repository.PostRepo;
 import app.eventful.repository.UserRepo;
 import app.eventful.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,10 +29,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User newUser) {
-        // * TODO: proveri dali postoi userot spored email vo baza, pa potoa kreariraj go
+    public User findByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
 
-        return userRepo.save(newUser);
+    @Override
+    public User createUser(User newUser) {
+        User oldUser = findByEmail(newUser.getEmail());
+        return Objects.requireNonNullElseGet(oldUser, () -> userRepo.save(newUser));
     }
 
     @Override
